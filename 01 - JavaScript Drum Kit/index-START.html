@@ -12,6 +12,7 @@
     <div data-key="65" class="key">
       <kbd>A</kbd>
       <span class="sound">clap</span>
+      <audio data-key="65" src="sounds/clap.wav"></audio>
     </div>
     <div data-key="83" class="key">
       <kbd>S</kbd>
@@ -58,7 +59,9 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  function addSound(e) {
+
+
+  const addSound = (e) => {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
     if (!audio) return;
@@ -68,10 +71,9 @@
     audio.play();
   }
 
-  function removeTransition(e) {
+  const removeTransition = (e) => {
     e.target.classList.remove("playing");
   }
-
 
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
