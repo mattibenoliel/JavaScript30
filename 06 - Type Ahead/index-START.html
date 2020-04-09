@@ -2,20 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Type Ahead 👀</title>
+  <title>start Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <form class="search-form">
     <input type="text" class="search" placeholder="City or State">
-    <ul class="suggestions">
+    <ul class="suggestions" id="suggestions">
       <li>Filter for a city</li>
       <li>or a state</li>
     </ul>
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+const ul = document.getElementById('suggestions');
+const arrayCity = [];
+
+const request = new XMLHttpRequest();
+request.open('GET', endpoint);
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+  const cityOrState = request.response;
+  cityOrState.forEach(obj => {
+    arrayCity.push(obj.city);
+  });
+  // result(cityOrState);
+  console.log(cityOrState);
+}
+
+console.log(arrayCity);
+
+for (let i = 1; i <= 5; i++){
+  let myLi = document.createElement('li');
+  myLi.textContent = arrayCity[i];
+  ul.appendChild(myLi);
+}
+
+
+// function result(jsonObj) {
+//   const myLi = document.createElement('li');
+//   myLi.textContent = jsonObj['city'];
+//   ul.appendChild(myLi);
+//   console.log(myLi);
+// }
+
+
+
 
 </script>
 </body>
